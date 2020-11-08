@@ -9,10 +9,12 @@ const welcome = require('./routes/welcome');
 
 const app = express();
 
+
 app.set('secretKey', 'hcuahicudhuihfciuhXXYcbyhdbauAAASSSSDdbaiu&22212'); // jwt secret token
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(express.json());
 
 // Middleware
 const validateUser = (req, res, next) =>
@@ -21,6 +23,7 @@ const validateUser = (req, res, next) =>
             res.json({ status: "error", message: err.message, data: null });
         } else {
             // add user id to request
+            // req.username = decoded;
             req.body.userId = decoded.id;
             next();
         }
