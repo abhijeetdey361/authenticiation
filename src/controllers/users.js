@@ -6,10 +6,10 @@ const dbFilePath = `${__dirname}../../../data/user-db.json`;
 module.exports = {
     authenticate: async (req, res, next) => {
         const adminData = await readFile(dbFilePath);
-        const {id, username, password } = req.body;
+        const { username, password } = req.body;
 
-        if(username === adminData.email && password === adminData.password){
-            const token = jwt.sign({ id: userInfo.id }, req.app.get('secretKey'), { expiresIn: '1h' });
+        if(username === adminData.username && password === adminData.password){
+            const token = jwt.sign({ username }, req.app.get('secretKey'), { expiresIn: '1h' });
          res.json({ status: 200, data: { token } });
         }
         else
